@@ -33,10 +33,9 @@ node *clone(node *head) {
     curr= head;
     //Set arbit pointer
     while(curr) {
-        if(curr->next) {
+        if(curr->next)
             curr->next->arbit= curr->arbit->next;
-            curr= curr->next->next;
-        }
+        curr= curr->next->next;
     }
     //Separate Original & New List
     node *original = head, *copy= head->next;
@@ -49,8 +48,8 @@ node *clone(node *head) {
         copy= copy->next;
         //cout<<copy->data;
     }
-    original->next= NULL;
-    copy->next= NULL;
+    // original->next= NULL;
+    // copy->next= NULL;
     return temp;
 }
 int main() {

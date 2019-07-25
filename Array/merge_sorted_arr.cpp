@@ -1,4 +1,3 @@
-
 //More two sorted array in O(1) space
 #include<iostream>
 using namespace std;

@@ -22,7 +22,7 @@ void findLongestPalindrome(string str) {
         }
     }
     //For SUBSTRING OF LENGTH >=3
-    for(int k=3; k <=n; ++k) {
+    for(int k=3; k<=n; ++k) {
         for(i=0; i < n-k+1; ++i) {
             int j= i+k-1; //ending index of Palindrome String
             

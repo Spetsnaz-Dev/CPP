@@ -1,4 +1,4 @@
-//Longest Common Prefix in an Array
+//Longest Common Prefix in an Array of Strings
 #include<bits/stdc++.h>
 using namespace std;
 

@@ -17,6 +17,7 @@ for (int l = 1; i + l - 1 < len; l++)
 string t = s.substr(i, l);
 sort(t.begin(), t.end());
 m[t]++;
+cout<<m[t]<<"-";
 }
 }
 long long ans = 0;

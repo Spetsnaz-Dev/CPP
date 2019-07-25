@@ -17,10 +17,10 @@ main()
 
       for(int i=0;i<s.size();i++)
         {
-            if(m[s[i]]==0)                                    //if value not equals to zero print
+            if(m[s[i]]==0)      //if value not equals to zero print
             {
-                cout<<s[i];                                   //print
-                m[s[i]]=1;                                    //assigning zero so that does not get printed again
+                cout<<s[i];       //print
+                m[s[i]]=1;        //assigning zero so that does not get printed again
             }
 
         }
