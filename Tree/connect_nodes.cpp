@@ -1,11 +1,4 @@
 //Connect Nodes at same level
-/* struct Node
-{
-  int data;
-  Node *left,  *right;
-  Node *nextRight;  // This has garbage value in input trees
-}; */
-// Should set the nextRight for all nodes
 void connect(Node *p)
 {
     if(p== NULL)

@@ -6,7 +6,7 @@ int partition(int arr[], int l, int r) {
     int x= arr[r];
     int i=l-1;
     int j;
-    for(j=l; j<r-1; j++) {
+    for(j=l; j<=r-1; j++) {
         if(arr[j] <= x) {
             i+=1;
             int temp= arr[i];

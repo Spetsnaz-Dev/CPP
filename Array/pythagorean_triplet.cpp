@@ -24,7 +24,7 @@ bool pyTriplet(int arr[], int n) {
     //int i;
     for(int i=0;i<n;i++)
         arr[i] = arr[i] * arr[i];
-InsertionSort(arr, n);
+    InsertionSort(arr, n);
     for(int i=n-1; i>=2;i--) {
         int l= 0, r= i-1;
         while(l<r) {

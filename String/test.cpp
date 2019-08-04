@@ -1,25 +1,21 @@
-#include<iostream>
+#include<bits/stdc++.h>
 using namespace std;
-void reverse(long long number) {
-    
-    if(number == 0)
-        return;
-        
-    int digit = number % 10;
-    cout<<digit;
-    
-    reverse(number/10);
+void check(string s) {
+    set<char> st;
+    for(int i=0;i<s.length();i++)
+        st.insert(s[i]);
+    for(auto i = st.begin();i!=st.end();i++)
+        cout<<*i<<" ";
+    //cout<<"\n";
 }
 int main()
  {
 	int t;
     cin>>t;
     while(t--) {
-        long long n;
-        cin>>n;
-        while(n%10 == 0)
-            n /= 10;
-        reverse(n);
+        string s;
+        cin>>s;
+        check(s);
         cout<<"\n";
             }
 	return 0;
