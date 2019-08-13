@@ -1,7 +1,31 @@
 #include<stdio.h>
 #include<bits/stdc++.h>
- using namespace std;
+using namespace std;
+//Method 2 using stringstream and stack
+// void reverseWords(char *s) {
+//     string word;
+//     stringstream ss(s);
+//     string res = "";
+//     stack<string> st;
+    
+//     while(getline(ss, word, '.'))
+//     {
+//         st.push(word);
+//         //st.push(".");
+//     }
+        
+//     while(!st.empty())
+//     {
+//         res += st.top();
+//         st.pop();
+        
+//         if(st.size() > 0)
+//             res += ".";
+//     }
+//     cout<<res;
+// }
 
+//Method 1
 void reverse(char *begin, char *end)
 {
   char temp;
@@ -30,8 +54,7 @@ void reverseWords(char *s)
       word_begin = temp+1;
     }
   } 
-  cout<<"Before last rott- "<<s<<"\n";
-   /*STEP 2 of the above algorithm */
+  //cout<<"Before last rotation- "<<s<<"\n";
   reverse(s, temp-1);
 }
  
@@ -46,5 +69,5 @@ int main()
   reverseWords(s);
   cout<<s<<endl;
   }
-
+  return 0;
 }

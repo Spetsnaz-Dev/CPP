@@ -14,7 +14,8 @@ void longestDistance(int x, int y)
     {
         if(x > y)
             x = x >> 1;
-        c++;
+            c++;
+            
         if(y > x)
         {
             y = y >>1;
