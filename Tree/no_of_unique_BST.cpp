@@ -3,7 +3,7 @@ using namespace std;
 unsigned long int binomialCoeff(int n, int k)
 {
     int res = 1;
-    if(k> n-k)
+    if(k> n-k)      //nCr = nCn-r
         k = n-k;
     for(int i=0;i<k;i++)
     {
@@ -14,7 +14,7 @@ unsigned long int binomialCoeff(int n, int k)
 }
 unsigned int catalan(int n)
 {
-    //res = 2n/(n+1);
+    //res = 2nCn/(n+1);
     long int res = binomialCoeff(2*n, n);
     
     return res/(n+1);
