@@ -1,7 +1,7 @@
 #include<iostream>
 using namespace std;
 void sumArray(int arr[], int n) {
-    int i,j;
+    register int i,j;
     long excluding_curr=0, including_curr= arr[0];
 
     for(i=0;i<n;i++) {

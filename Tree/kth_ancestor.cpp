@@ -2,6 +2,7 @@ bool callingWith(Node *root, int node, vector<int> &v)
 {
     if(root==NULL)
         return 0;
+    
     v.push_back(root->data);
     
     if(root->data == node)

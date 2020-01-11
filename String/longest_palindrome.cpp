@@ -36,19 +36,23 @@ void findLongestPalindrome(string str) {
             }
         }
     }
-    for(i= start; i<= start+max_length-1; i++)
-        cout<<str[i];
+    int total_len=0;string res="";
+    for(i= start; i<= start+max_length-1; i++){
+        total_len++;
+        res += str[i];
+    }
+    cout<<total_len<<endl<<res;
     cout<<"\n";
 }
 
 int main() {
     int t;
     cin>>t;
-    while(t--) {
+    //while(t--) {
         string s;
         //string s= "kjqlrzzfmlvyoshiktodnsjjp";
         cin>>s;
         findLongestPalindrome(s);
-    }
+    //}
     return 0;
 }

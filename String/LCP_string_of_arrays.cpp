@@ -8,7 +8,7 @@ string findLCP_Of_Array(string str[], int len) {
     sort(str, str+len);
     int last = min(str[0].length(), str[len-1].length());
     int i=0;
-    while(i< last && str[0][i] == str[len-1][i])
+    while(i < last && str[0][i] == str[len-1][i])
         i++;
     if(i==0)
         return "-1";
