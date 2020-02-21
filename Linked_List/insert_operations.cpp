@@ -7,6 +7,7 @@ struct node {
 };
 
 void push(node **head, int data) {
+    // node *ptr = *head;
     node *new_node = new node;
     new_node->data = data;
     new_node->next = *head;

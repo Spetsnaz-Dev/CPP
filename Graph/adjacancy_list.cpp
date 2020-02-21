@@ -1,11 +1,6 @@
 //print adjacancy list of a graph
 #include<bits/stdc++.h>
 using namespace std;
-// void addEdge(vector<int> arr[], int edge, int vertex)
-// {
-//     arr[edge].push_back(vertex);
-//     arr[vertex].push_back(edge);
-// }
 void printGraph(vector<int> arr[], int v)
 {
     for(int i=0;i<v;i++){
