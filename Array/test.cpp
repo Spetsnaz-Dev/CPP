@@ -19,9 +19,7 @@ int check(char c[])
             s.pop();
         else
             return 0;
-
     }
-
 }
 if(s.empty()==true){
     return 1;
