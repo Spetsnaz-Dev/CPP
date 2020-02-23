@@ -1,3 +1,4 @@
+// Find the element before which all the elements are smaller than it, and after which all are greater
 #include<bits/stdc++.h>
 using namespace std;
 
