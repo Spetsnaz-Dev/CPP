@@ -1,5 +1,6 @@
 //print adjacancy list of a graph
-#include<bits/stdc++.h>
+#include<iostream>
+#include<vector>
 using namespace std;
 void printGraph(vector<int> arr[], int v)
 {

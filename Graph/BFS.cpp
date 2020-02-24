@@ -1,14 +1,9 @@
 #include<bits/stdc++.h>
 using namespace std;
-//Position this line where user code will be pasted.
-
-/* Function to do BFS of graph
-*  adj[]: array of vectors
-*  vis[]: array to keep track of visited nodes
-*/
+/*  adj[]: array of vectors
+*  vis[]: array to keep track of visited nodes  */
 void bfs(int s, vector<int> adj[], bool vis[], int N)
 {
-    // Your code here
     queue<int> q;
     q.push(s);
     vis[s] = true;

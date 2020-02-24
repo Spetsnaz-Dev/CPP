@@ -1,9 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
-/* Function to do DFS of graph
-*  g[]: array of vectors to represent graph
-*  vis[]: array to keep track of visited vertex
-*/
+/* g[]: array of vectors to represent graph
+*  vis[]: array to keep track of visited vertex */
 void dfs(int s, vector<int> g[], bool *vis)
 {
     vis[s] = true;
