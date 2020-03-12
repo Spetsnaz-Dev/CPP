@@ -53,7 +53,7 @@ void reverseWords(char *s)
       reverse(word_begin, temp-1);
       word_begin = temp+1;
     }
-  } 
+  }  
   //cout<<"Before last rotation- "<<s<<"\n";
   reverse(s, temp-1);
 }
