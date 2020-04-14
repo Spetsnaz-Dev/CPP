@@ -1,3 +1,4 @@
+// Method 1
 int findMaxLength(vector<int>& nums) {
         // Fast I/O
         ios_base::sync_with_stdio(false);
