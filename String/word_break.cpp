@@ -1,27 +1,4 @@
-// #include <bits/stdc++.h>
-// using namespace std;
-// int findans(set<string> &dict,string b)
-// {
-//     if(b.empty())
-//     {
-//         return 1;
-//     }
-//     string check;
-//     int result=0;
-//     for(int i=0;i<b.length();i++)
-//     {
-//         check+=b[i];
-//         // auto pos=dict.find(check);
-//         if(dict.find(check) != dict.end())
-//         {
-//             int ans=findans(dict,b.substr(i+1));
-//             result=max(result,ans);
-//         }
-//     }
-    
-//     return result;
-// }
-
+// Word Break Problem
 #include <bits/stdc++.h>
 using namespace std;
 
