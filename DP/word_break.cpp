@@ -2,7 +2,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-bool checkWordBreak(set<string>& st, string word)
+bool checkWordBreak(unordered_set<string>& st, string word)
 {
     int size = word.size();
 
@@ -30,7 +30,20 @@ bool checkWordBreak(set<string>& st, string word)
     }
     return false;
 }
+bool checkWordBreak(unordered_set<string>& st, string s) {
 
+        int n = s.size();
+        vector<bool> dp(n+1, false);
+        dp[0] = true;
+        
+        for (int i = 1; i <= n; i++) {
+            for (int j = 0; j < i; j++) {
+                if (dp[j] and st.count(s.substr(j, i-j)))
+                    dp[i] = true;
+            }
+        }
+        return dp[n];
+}
 int main()
 {
     int t;
@@ -39,7 +52,7 @@ int main()
 	{
 	    int n;
 	    cin>>n;
-	    set<string>dict;
+	    unordered_set<string>dict;
 	    while(n--)
 	    {
 	        string a;
