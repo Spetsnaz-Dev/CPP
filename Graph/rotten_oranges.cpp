@@ -88,9 +88,7 @@ int rottenOranges(vector<vector<int>>& grid) {
 // Method 2 DFS Implementation
 int orangesRotting(vector<vector<int>>& grid) {
         if(grid.empty())
-        {
             return 0;
-        }
 
         int counter{0};
         queue<pair<int,int>> q;

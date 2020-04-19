@@ -1,69 +1,55 @@
-// Rotten Oranges
-int orangesRotting(vector<vector<int>>& grid) {
-        if(grid.empty())
-        {
-            return 0;
-        }
-
-        int counter{0};
-        queue<pair<int,int>> q;
+int rotOranges(vector<vector<int> > arr, int R, int C)
+{
+    if(arr.empty())
+        return 0;
         
-      for(auto row=0; row<grid.size(); row++)
-      {
-          for(auto col=0; col<grid[0].size(); col++)
-          {
-                if(grid[row][col]==2)
-                {
-                    q.push({row,col});
-                }
-                else if(grid[row][col]==1)
-                {
-                    ++counter;
-                }
-          }
-      }
-       if(!counter) return 0;
-
-        int res{0};
-        while(!q.empty())
-        {  
-               ++res;
-            int size=q.size();
-            for(int i=0;i<size;i++)
-            {
-                auto row=q.front().first;
-                auto col=q.front().second;
-                q.pop();
-
-                if(row>0 && grid[row-1][col]==1)
-                {
-                    grid[row-1][col]=2;//mark is visisted
-                    q.push({row-1,col});
-                    --counter;
-                }
-                if(row<grid.size()-1 && grid[row+1][col]==1)
-                {
-                    grid[row+1][col]=2;//mark is visisted
-                    q.push({row+1,col});
-                    --counter;
-                }
-                if(col>0 && grid[row][col-1]==1)
-                {
-                    grid[row][col-1]=2;//mark is visisted
-                    q.push({row,col-1});
-                    --counter;
-                } 
-                if(col<grid[0].size()-1 && grid[row][col+1]==1)
-                {
-                    grid[row][col+1]=2;//mark is visisted
-                    q.push({row,col+1});
-                    --counter;
-                }
+    queue<pair<int, int> q;
+    int counter{0};
+    
+    for(int i=0; i<R; i++)
+        for(int j=0; i<C; j++)
+            if(arr[i][j] == 2)
+                q.push(make_pair(i, j));
+            else if(arr[i][j] == 1)
+                counter++;
+                
+    if(!counter)
+        return 0;
+    
+    // DFS
+    int count = 0;
+    while(!q.empty()) {
+        ++count;
+        int s = q.size();
+        
+        while(s--) {
+            pair<int, int> p = q.front();
+            q.pop();
+            
+            if(p.first < R-1 and arr[i+1][j] == 1){
+                arr[i+1][j] = 2;
+                q.push(make_pair(i+1, j));
+                counter--;
+            }
+            if(p.first > 0 and arr[i-1][j] == 1){
+                arr[i-1][j] = 2;
+                q.push(make_pair(i-1, j));
+                counter--;
+            }
+            if(p.second < C-1 and arr[i][j+1] == 1){
+                arr[i][j+1] = 2;
+                q.push(make_pair(i, j+1));
+                counter--;
+            }
+            if(p.second > 0 and arr[i][j-1] == 1){
+                arr[i][j-1] = 2;
+                q.push(make_pair(i, j-1));
+                counter--;
             }
         }
-            if(!counter)
-            {
-                return res-1;
-            }
-            return -1;
+    }
+    if(!counter)
+        return count-1;
+    else
+        return -1;
 }
