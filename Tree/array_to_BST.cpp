@@ -16,9 +16,18 @@ Node* newNode(int x)
 Node *buildBST(int arr[], int low, int high)
 {
     int mid = (low+high)/2;
-    Node *root = arr[mid];
+    Node *root = newNode(arr[mid]);
     buildBST(arr, low, mid-1);
     buildBST(arr, mid+1, high);
+
+    return root;
+}
+void preorder(Node *root){
+    if(!root)
+        return;
+    cout<<root->data<<" ";
+    preorder(root->left);
+    preorder(root->right);
 }
 int main()
  {
@@ -37,3 +46,23 @@ int main()
     }
 	return 0;
 }
+//Method 2
+TreeNode *buildBST(TreeNode* &root, int ele) {
+        if(!root)
+            return root = new TreeNode(ele);
+        
+        if(root->val > ele)
+            root->left = buildBST(root->left, ele);
+        else
+            root->right = buildBST(root->right, ele);
+        
+        return root;
+    }
+    TreeNode* bstFromPreorder(vector<int>& pre) {
+        TreeNode *root = NULL;
+        
+        for(auto x : pre)
+            buildBST(root, x);
+        
+        return root;
+    }
