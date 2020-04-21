@@ -1,55 +1,30 @@
-int rotOranges(vector<vector<int> > arr, int R, int C)
-{
-    if(arr.empty())
-        return 0;
-        
-    queue<pair<int, int> q;
-    int counter{0};
+#include "bits/stdc++.h"
+using namespace std;
+
+string abbreviation(string s1, string s2) {
+    int n1 = s1.size(), n2 = s2.size();
+
+    unordered_set<char> st;
     
-    for(int i=0; i<R; i++)
-        for(int j=0; i<C; j++)
-            if(arr[i][j] == 2)
-                q.push(make_pair(i, j));
-            else if(arr[i][j] == 1)
-                counter++;
-                
-    if(!counter)
-        return 0;
-    
-    // DFS
-    int count = 0;
-    while(!q.empty()) {
-        ++count;
-        int s = q.size();
-        
-        while(s--) {
-            pair<int, int> p = q.front();
-            q.pop();
-            
-            if(p.first < R-1 and arr[i+1][j] == 1){
-                arr[i+1][j] = 2;
-                q.push(make_pair(i+1, j));
-                counter--;
-            }
-            if(p.first > 0 and arr[i-1][j] == 1){
-                arr[i-1][j] = 2;
-                q.push(make_pair(i-1, j));
-                counter--;
-            }
-            if(p.second < C-1 and arr[i][j+1] == 1){
-                arr[i][j+1] = 2;
-                q.push(make_pair(i, j+1));
-                counter--;
-            }
-            if(p.second > 0 and arr[i][j-1] == 1){
-                arr[i][j-1] = 2;
-                q.push(make_pair(i, j-1));
-                counter--;
-            }
-        }
+    char c;
+    for(int i=0; i<n1; i++){
+        c = toupper(s1[i]);
+        st.insert(c);
     }
-    if(!counter)
-        return count-1;
-    else
-        return -1;
+    
+    for(int i=0; i<n2; i++){
+        c = toupper(s2[i]);
+        if(st.find(c) == st.end())
+            return "NO";
+    }
+    return "YES";
+}
+int main()
+{
+    string s1, s2;
+    cin>>s1>>s2;
+    
+    cout<<abbreviation(s1, s2)<<"\n";
+
+    return 0;
 }

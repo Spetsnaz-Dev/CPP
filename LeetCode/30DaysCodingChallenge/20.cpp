@@ -14,7 +14,7 @@ int leftMostColumnWithOne(BinaryMatrix &binaryMatrix) {
                 x++;
                 continue;
             }
-            if(binaryMatrix.get(x, y) == 1)
+            else
                 if(res > y){
                     res = y;
                     flag = 1;
