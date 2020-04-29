@@ -17,7 +17,7 @@ int main()
 	32 bit system. */
 	clock_t start, end; 
 
-	start = clock(); 
+	start = clock(); git
 
 	fun(); 
 	
