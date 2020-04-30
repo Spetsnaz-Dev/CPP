@@ -1,14 +1,12 @@
-bool canJump(vector<int>& arr) {
+int rangeBitwiseAnd(int a, int b) {
         ios_base::sync_with_stdio(false);
         cin.tie(NULL);
         
-        int n = arr.size();
-        int maxReach = 0;
-        
-        for(int i=0; i<n; i++){
-            if(maxReach < i)
-                return false;
-            maxReach = max(maxReach, arr[i]+i);
+        int count = 0;
+        while(a != b){
+            a >>= 1;
+            b >>= 1;
+            count++;
         }
-        return true;
+        return a<<=count;
     }

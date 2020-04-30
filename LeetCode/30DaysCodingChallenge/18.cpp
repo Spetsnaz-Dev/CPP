@@ -1,29 +1,41 @@
+// Min Cost Path
 // Method 1
-int search(vector<int>& arr, int target) {
+int minPathSum(vector<vector<int>>& grid) {
         ios_base::sync_with_stdio(false);
-        cin.tie(NULL);
+    cin.tie(NULL);
         
-        int n = arr.size();
+    int m = grid.size();
+    int n = grid[0].size();
+    vector<vector<int>> dp(m,vector<int>(n,0));
+    dp[0][0] = grid[0][0];
+    for(int i=1;i<m;i++)
+        dp[i][0] = dp[i-1][0] + grid[i][0];
+    for(int j=1;j<n;j++)
+        dp[0][j] = dp[0][j-1] + grid[0][j];
+     for(int i=1;i<m;i++)
+         for(int j=1;j<n;j++)
+             dp[i][j] = min(dp[i-1][j],dp[i][j-1]) + grid[i][j];
+        return dp[m-1][n-1];
+    }
+
+// Method 2
+int minPathSum(vector<vector<int>>& grid) {
+        int n = grid.size(), m = grid[0].size();
         
-        int low = 0, high = n-1;
-        while(low <= high) {
-            int mid = (low+high)/2;
-            
-            if(arr[mid] == target)
-                return mid;
-            
-            if(arr[low] <= arr[mid]) {
-                if(arr[mid] >= target and arr[low] <= target)
-                    high = mid-1;
-                else
-                    low = mid+1;
-            }
-            else {
-                if(arr[mid] <= target and arr[high] >= target)
-                    low = mid+1;
-                else
-                    high = mid-1;
+        int i, j;
+        vector<vector<int>> dp(n,vector<int>(m,0));
+        dp[0][0] = grid[0][0];
+        
+        for(i=0; i<n; i++){
+            for(j=0; i<m; j++){
+                if(i>0 and j>0)
+                    grid[i][j] += min(grid[i-1][j], grid[i][j-1]);
+                else if(i==0 and j>0)
+                    grid[i][j] += grid[i][j-1];
+                else if(i>0 and j==0)
+                    grid[i][j] += grid[i-1][j];
             }
         }
-        return -1;
+        return grid[n-1][m-1];
     }
+    

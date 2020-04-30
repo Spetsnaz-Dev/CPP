@@ -1,25 +1,42 @@
-int longestCommonSubsequence(string s1, string s2) {
-        
+    // LRU Cache
+    list<pair<int, int>> dq;
+    unordered_map<int, list<pair<int, int>>::iterator> mp;
+    int size;
+    
+    LRUCache(int capacity) {
         ios_base::sync_with_stdio(false);
         cin.tie(NULL);
         
-        int n1 = s1.size(), n2 = s2.size();
+        size = capacity;
+    }
+    
+    int get(int key) {
+        if(mp.find(key) == mp.end())
+            return -1;
         
-        int dp[n1+1][n2+1];
+        auto it = mp[key];
+        int val = it->second;
+        dq.erase(it);
         
-        for(int i = 0; i <= n1; i++)
-            dp[i][0] = 0;
-        for(int i = 0; i <= n2; i++)
-            dp[0][i] = 0;
+        dq.push_front({key, val});
+        mp[key] = dq.begin();
         
-        for(int i = 1; i <= n1; i++){
-            for(int j = 1; j <= n2; j++){
-                if(s1[i-1] == s2[j-1])
-                    dp[i][j] = dp[i-1][j-1] + 1;
-                else
-                    dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
-                
-                }
+        return val;
+    }
+    
+    void put(int key, int value) {
+        if(mp.find(key) == mp.end()){
+            if(dq.size() == size){
+                auto last = dq.back();
+                mp.erase(last.first);
+                dq.pop_back();
             }
-        return dp[n1][n2];
+        }
+        else{
+            auto it = mp[key];
+            dq.erase(it);
+        }
+        
+        dq.push_front({key, value});
+        mp[key] = dq.begin();
     }

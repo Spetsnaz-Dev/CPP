@@ -1,19 +1,29 @@
-TreeNode *buildBST(TreeNode* &root, int ele) {
-        if(!root)
-            return root = new TreeNode(ele);
+// Method 1
+int search(vector<int>& arr, int target) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
         
-        if(root->val > ele)
-            root->left = buildBST(root->left, ele);
-        else
-            root->right = buildBST(root->right, ele);
+        int n = arr.size();
         
-        return root;
-    }
-    TreeNode* bstFromPreorder(vector<int>& pre) {
-        TreeNode *root = NULL;
-        
-        for(auto x : pre)
-            buildBST(root, x);
-        
-        return root;
+        int low = 0, high = n-1;
+        while(low <= high) {
+            int mid = (low+high)/2;
+            
+            if(arr[mid] == target)
+                return mid;
+            
+            if(arr[low] <= arr[mid]) {
+                if(arr[mid] >= target and arr[low] <= target)
+                    high = mid-1;
+                else
+                    low = mid+1;
+            }
+            else {
+                if(arr[mid] <= target and arr[high] >= target)
+                    low = mid+1;
+                else
+                    high = mid-1;
+            }
+        }
+        return -1;
     }

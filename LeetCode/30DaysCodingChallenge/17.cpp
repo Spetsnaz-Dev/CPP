@@ -1,41 +1,33 @@
-// Min Cost Path
-// Method 1
-int minPathSum(vector<vector<int>>& grid) {
-        ios_base::sync_with_stdio(false);
+// No of Island
+void dfs(vector<vector<char>>& grid, int i, int j) {
+        
+        if(i<0 or i>=grid.size())   return ;
+        
+        if(j<0 or j>=grid[i].size())    return ;
+        
+        // No need to check if already 0(water)
+        if(grid[i][j] == '0')   return ;
+        
+        grid[i][j] = '0';
+        
+        dfs(grid, i-1, j);  //Up
+        dfs(grid, i+1, j);  //Down
+        dfs(grid, i, j+1);  //Right
+        dfs(grid, i, j-1);  //Left
+}
+int numIslands(vector<vector<char>>& grid) {
+    ios_base::sync_with_stdio(false);
     cin.tie(NULL);
         
-    int m = grid.size();
-    int n = grid[0].size();
-    vector<vector<int>> dp(m,vector<int>(n,0));
-    dp[0][0] = grid[0][0];
-    for(int i=1;i<m;i++)
-        dp[i][0] = dp[i-1][0] + grid[i][0];
-    for(int j=1;j<n;j++)
-        dp[0][j] = dp[0][j-1] + grid[0][j];
-     for(int i=1;i<m;i++)
-         for(int j=1;j<n;j++)
-             dp[i][j] = min(dp[i-1][j],dp[i][j-1]) + grid[i][j];
-        return dp[m-1][n-1];
-    }
-
-// Method 2
-int minPathSum(vector<vector<int>>& grid) {
-        int n = grid.size(), m = grid[0].size();
+    int count = 0;
         
-        int i, j;
-        vector<vector<int>> dp(n,vector<int>(m,0));
-        dp[0][0] = grid[0][0];
-        
-        for(i=0; i<n; i++){
-            for(j=0; i<m; j++){
-                if(i>0 and j>0)
-                    grid[i][j] += min(grid[i-1][j], grid[i][j-1]);
-                else if(i==0 and j>0)
-                    grid[i][j] += grid[i][j-1];
-                else if(i>0 and j==0)
-                    grid[i][j] += grid[i-1][j];
+    for(int i=0; i<grid.size(); i++){
+        for(int j=0; j<grid[i].size(); j++){
+            if(grid[i][j] == '1'){
+                ++count;
+                dfs(grid, i, j);
             }
         }
-        return grid[n-1][m-1];
     }
-    
+    return count;
+}

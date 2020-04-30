@@ -1,27 +1,19 @@
-int leftMostColumnWithOne(BinaryMatrix &binaryMatrix) {
-        ios_base::sync_with_stdio(false);
-        cin.tie(NULL);
+TreeNode *buildBST(TreeNode* &root, int ele) {
+        if(!root)
+            return root = new TreeNode(ele);
         
-        int res = INT_MAX, flag = 0;
-        vector<int> arr;
-        arr = binaryMatrix.dimensions();
-        cout<<arr[0]<<" "<<arr[1]<<endl;
+        if(root->val > ele)
+            root->left = buildBST(root->left, ele);
+        else
+            root->right = buildBST(root->right, ele);
         
-        int row = arr[0], col = arr[1];
-        int x = 0, y = col-1;
-        while(x < row and y >= 0) {
-            if(binaryMatrix.get(x, y) == 0){
-                x++;
-                continue;
-            }
-            else
-                if(res > y){
-                    res = y;
-                    flag = 1;
-                }
-                y--;
-        }
-        if(flag == 0) 
-            return -1;
-        return res;
+        return root;
+    }
+    TreeNode* bstFromPreorder(vector<int>& pre) {
+        TreeNode *root = NULL;
+        
+        for(auto x : pre)
+            buildBST(root, x);
+        
+        return root;
     }
