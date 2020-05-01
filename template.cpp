@@ -4,7 +4,7 @@
 #define ll long long int
 using namespace std;
 
-// solver function
+// solver functionzz
 void solve(){}
 
 int main()
