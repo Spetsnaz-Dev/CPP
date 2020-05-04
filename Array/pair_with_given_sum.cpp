@@ -2,21 +2,20 @@
 using namespace std;
 int findPairs(int arr[], int n, int key)
 {
-    int count = 0, l = 0, r = n-1;
-    sort(arr, arr+n);
-    
-    while(l < r)
+    int count = 0;
+
+    unordered_map<int, int> mp;
+    for (size_t i = 0; i < n; i++)
     {
-        int sum = arr[l]+arr[r];
-        if(sum == key)
-            count++;
-        else if(sum > key)
-            r--;
-        else
-            l++;
-        r--;
+        mp[arr[i]]++;
     }
-    return count > 0 ? count : -1;
+
+    for (size_t i = 0; i < n; i++)
+    {
+        if(mp.find(key - arr[i]) != mp.end())
+            count += mp[key - arr[i]];
+    }
+    return count;
 }
 int main()
  {
