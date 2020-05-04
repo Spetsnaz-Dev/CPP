@@ -21,19 +21,17 @@ bool cyclicShiftOperation(int arr[],
 void minSwaps(int arr[], int n, int k){
     int res = 0, i;
     
-    int sorted[n];
+    vector<pair<int, int>> sorted;
     for(i=0; i<n; i++)
-        sorted[i] = arr[i];
+        sorted.push_back({arr[i], i});
         
-    sort(sorted, sorted+n);
+    sort(sorted.begin(), sorted.end());
 
     vector<vector<int>> ans;
-    // while(res <= k)
-    // {
-        pair<int, int> pa, pb, pc;
-        pa = pb = pc = {0, -1};
-        for(i=0; i<n; i++){
-        if(arr[i] != sorted[i])
+    pair<int, int> pa, pb, pc;
+    pa = pb = pc = {0, -1};
+    for(i=0; i<n; i++){
+        if(arr[i] != sorted[i].first)
         {
             if(!pa.first){
                 pa = {arr[i], i+1};
@@ -57,7 +55,8 @@ void minSwaps(int arr[], int n, int k){
                 res++;
         }
         }   // end for loop
-    // }
+
+
     if(res >= k){
         //check if sorted
         for(int i=1; i<n; i++){
