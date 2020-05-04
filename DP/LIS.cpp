@@ -10,7 +10,7 @@ void LIS(int arr[], int size)
         lis[i] = 1;
         while(j < i)
         {
-            if((arr[i] > arr[j]) && (lis[i] < lis[j] + 1))
+            if((arr[j] < arr[i]) and (lis[i] < lis[j] + 1))
                 lis[i] = lis[j] + 1;
             j++;
         }

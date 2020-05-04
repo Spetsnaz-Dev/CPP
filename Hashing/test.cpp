@@ -1,34 +1,48 @@
-//Sum of f(a[i], a[j]) over all pairs in an array of n integers
-#include<bits/stdc++.h>
-using namespace std;
-void findSum(int arr[], int n)
+LRUCache::LRUCache(int N)
 {
-    int sum;
-    long res=0;
-    for(int i=0;i<n-1;i++)
-        for(int j=i+1;j<n;j++)
-        {
-            if(abs(arr[j] - arr[i]) > 1)
-            {
-                sum = (arr[j] - arr[i]);
-                res+= sum;
-                //arr[i] = arr[j] = sum;
-            }
-        }
-        cout<<res<<"\n";
+capacity = N;
+umap.reserve(capacity);
+l.clear();
+umap.clear();
+//Your code here
 }
-int main()
+/*Sets the key x with value y in the LRU cache */
+void LRUCache::set(int x, int y)
 {
-    int t;
-    cin>>t;
-    while(t--)
-    {
-        int n;
-        cin>>n;
-        int arr[n];
-        for(int i=0;i<n;i++)
-            cin>>arr[i];
-        findSum(arr, n);
-    }
-    return 0;
+unordered_map<int, int="">::iterator it;
+it = umap.find(x);
+if (it == umap.end())
+{ if (l.size() == capacity)
+{
+int temp = l.front();
+l.pop_front();
+umap.erase(temp);
+}
+} else
+{
+// Update on already stores key
+l.remove(x);
+umap.erase(x);
+}
+l.push_back(x);
+umap[x] = y;
+//umap.insert(make_pair(x,y));
+}
+/*Returns the value of the key x if
+present else returns -1 */
+int LRUCache::get(int x)
+{
+
+unordered_map<int, int="">::iterator it;
+it = umap.find(x);
+
+if(it == umap.end() )
+{
+return -1;
+} else
+{
+l.remove(x);
+l.push_back(x);
+return it->second;
+}
 }
