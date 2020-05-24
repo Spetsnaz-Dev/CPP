@@ -1,3 +1,5 @@
+// Given an undirected graph of N nodes and E edges and a node X is given. The task is to find the level of X from 0. if X does not exist in the graph or is not connected (directly/indirectly) to 0 then print -1.
+
 /*  Function to find level of node X
 *   g[]: graph in input
 *   n: number of vertices
