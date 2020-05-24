@@ -4,6 +4,12 @@
 #define ll long long int
 using namespace std;
 
+static int speedUp = [](){
+    std::ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    return 0;
+}();
 // solver functionzz
 void solve(){}
 
