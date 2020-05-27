@@ -15,8 +15,9 @@ int main()
     while(t--) {
         string s;
         cin>>s;
-        check(s);
-        cout<<"\n";
+        // check(s);
+        int flag = s[0] == 'a' ? 1 : 0;
+        cout<<flag<<"\n";
             }
 	return 0;
 }
