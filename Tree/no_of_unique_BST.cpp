@@ -24,10 +24,10 @@ int main()
 	int t;
     cin>>t;
     while(t--) {
-        int n;
-        cin>>n;
-        
-        cout<<catalan(n)<<"\n";
+        int n,k;
+        cin>>n>>k;
+        cout<<binomialCoeff(n, k)<<"\n";
+        // cout<<catalan(n)<<"\n";
         }
 	return 0;
 }
