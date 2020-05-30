@@ -17,9 +17,9 @@ bool isCyclic_util(vector<int> adj[], vector<bool> visited, int curr)
 bool isCyclic(int V, vector<int> adj[])
 {
     vector<bool> visited(V,false);
-   bool FLAG = false;
-   for(int i=0;i<V;++i)
-   {
+    bool FLAG = false;
+    for(int i=0;i<V;++i)
+    {
            visited[i] = true;
            for(int j=0;j<adj[i].size();++j)
            {
@@ -28,12 +28,12 @@ bool isCyclic(int V, vector<int> adj[])
                    return true;
            }
            visited[i] = false;
-   }
-   return false;
+    }
+    return false;
 }
 
 //  Method 2
-bool returnCyclic(int v, int vis[], int recStack[], vector<int> adj[])
+bool returnCyclic(int v, vector<bool>& vis, vector<bool>& recStack, vector<int> adj[])
 {
     if(vis[v] == false)
     {
@@ -52,8 +52,8 @@ bool returnCyclic(int v, int vis[], int recStack[], vector<int> adj[])
 }
 bool isCyclic(int V, vector<int> adj[])
 {
-    int recStack[V] = {  false  };
-    int vis[V] = {  false };
+    vector<bool> recStack(V);
+    vector<bool> vis(V);
     
     for(int i=0;i<V;i++)
         if(returnCyclic(i, vis, recStack, adj))
