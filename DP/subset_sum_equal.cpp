@@ -16,9 +16,9 @@ void subsetSumPossible(int arr[], int n, int sum)
 
     for(int i=1; i<=n; i++){
         for(int j=1; j<=sum; j++){
-            if(dp[i-1][j])
+            if(j < arr[i-1])
                 dp[i][j] = dp[i-1][j];
-            else
+            else // -> else if(j >= arr[i-1])
                 dp[i][j] = dp[i-1][j-arr[i-1]] || dp[i-1][j];
         }
     }
