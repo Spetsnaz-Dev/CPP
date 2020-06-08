@@ -15,18 +15,17 @@ static int speedUp=[](){
 // solver functionzz
 void solve(int n)
 {
-    unordered_map<int, int> mp;
+    unordered_set<int> st;
     for(int i=1; i<=n*n; i++)
-        mp[i] = i;
+        st.insert(i);
     
     ll x = 1, i = 0, j = n-1;
-    // int arr[n][n] = {{0}};
     vector<vector<int>> arr(n, vector<int> (n));
 
     while (i < n)
     {
         arr[i][i] = x;
-        mp.erase(x);
+        st.erase(x);
         x += 2;
         i += 1;
     }
@@ -34,17 +33,17 @@ void solve(int n)
     while(i < n and j >= 0)
     {
         arr[i][j] = x;
-        mp.erase(x);
+        st.erase(x);
         x += 2;
         i += 1;
         j -= 1;
     }
-    auto it = mp.begin();
+    auto it = st.begin();
     for (int i = 0; i < n; i++)
         for(int j=0; j < n; j++)
             if(arr[i][j] == 0){
                 arr[i][j] = it->first;
-                mp.erase(it->first);
+                st.erase(it->first);
                 it++;
             }
     

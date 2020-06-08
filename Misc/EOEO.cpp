@@ -1,7 +1,7 @@
 #include "bits/stdc++.h"
 #define base9 1e9
 #define base7 1e7
-#define ll long long int
+#define ll unsigned long long int
 using namespace std;
 ll t,ts;
 
@@ -26,21 +26,21 @@ bool check(ll n, ll i)
 }
 bool checkPowerOf2(ll x){return ((x != 0) && !(x & (x - 1)));}
 // solver functionzz
-int solve(ll n)
+ll solve(ll n)
 {
     if(n & 1)
         return (n / 2);
+
     if(checkPowerOf2(n))
         return 0;
     
-    ll i = n-2, res = 0;
-    while(i > 0)
+    ll res;
+    while(!(n & 1))
     {
-        ll a = i, t = n;
-        if(!(n & 1))
-            res += check(t, a);
-        i -= 2;
+        n >>= 1;
     }
+
+    res = n / 2;
     return res;
 }
 
