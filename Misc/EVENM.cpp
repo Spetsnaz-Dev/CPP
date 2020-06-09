@@ -11,48 +11,64 @@ static int speedUp=[](){
     cout.tie(nullptr);
     return 0;
 }();
-
+void printOddMatrix(int n)
+{
+    int k = 1;
+    for(int i=0; i < n; i++){
+        for(int j = 0; j < n; j++)
+            cout<<k++<<" ";
+        cout<<endl;
+    }
+    return;
+}
+void printMatrix(vector<vector<int>> arr, int n)
+{
+    for (size_t i = 0; i < n; i++)
+    {
+        for (size_t j = 0; j < n; j++)
+        {
+            cout<<arr[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+    return;
+}
 // solver functionzz
 void solve(int n)
 {
-    unordered_set<int> st;
-    for(int i=1; i<=n*n; i++)
-        st.insert(i);
-    
-    ll x = 1, i = 0, j = n-1;
-    vector<vector<int>> arr(n, vector<int> (n));
+    if(n & 1)
+        return printOddMatrix(n);
 
-    while (i < n)
+    vector<vector<int>> arr(n, vector<int> (n));
+    int oddNum = 1, evenNum = 2;
+
+    for(int i=0; i<n; i++)
     {
-        arr[i][i] = x;
-        st.erase(x);
-        x += 2;
-        i += 1;
-    }
-    i = 0, x = 2;
-    while(i < n and j >= 0)
-    {
-        arr[i][j] = x;
-        st.erase(x);
-        x += 2;
-        i += 1;
-        j -= 1;
-    }
-    auto it = st.begin();
-    for (int i = 0; i < n; i++)
-        for(int j=0; j < n; j++)
-            if(arr[i][j] == 0){
-                arr[i][j] = it->first;
-                st.erase(it->first);
-                it++;
+        int j = 0;
+        if(i % 2 == 0){
+            while(j < n)
+            {
+                arr[i][j] = oddNum;
+                oddNum += 2;
+                j++;
+                arr[i][j] = evenNum;
+                evenNum += 2;
+                j++;
             }
-    
-    for (int i = 0; i < n; i++){
-        for(int j=0; j < n; j++){
-            cout<<arr[i][j]<<" ";
         }
-        cout<<"\n";
+        else{
+            while(j < n)
+            {
+                arr[i][j] = evenNum;
+                evenNum += 2;
+                j++;
+                arr[i][j] = oddNum;
+                oddNum += 2;
+                j++;
+            }
+        }
     }
+    printMatrix(arr, n);
 }
 
 int main()
