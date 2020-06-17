@@ -1,52 +1,35 @@
-class Solution {
-public:
-    bool isCyclic(vector<int> adj[], vector<int> vis, int curr)
+#include "bits/stdc++.h"
+using namespace std;
+
+int minPathSum(vector<vector<int>>& grid) {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    int m = grid.size();
+    int n = grid[0].size();
+    vector<vector<int>> dp(m,vector<int>(n,0));
+    dp[0][0] = grid[0][0];
+    for(int i=1;i<m;i++)
+        dp[i][0] = dp[i-1][0]/2 + grid[i][0];
+    for(int j=1;j<n;j++)
+        dp[0][j] = dp[0][j-1]/2 + grid[0][j];
+        for(int i=1;i<m;i++)
+            for(int j=1;j<n;j++)
+                dp[i][j] = min(dp[i-1][j],dp[i][j-1])/2 + grid[i][j];
+    return dp[m-1][n-1];
+}
+
+int main()
+{
+    int n;
+    cin>>n;
+    vector<vector<int>> arr(n, vector<int> (n));
+    for (size_t i = 0; i < n; i++)
     {
-        if(vis[curr] == 2)
-            return true;
-        
-        vis[curr] = 1;
-        
-        bool flag = 0;
-        for(int i=0; i<adj[curr].size(); i++)
+        for (size_t j = 0; j < n; j++)
         {
-            if(vis[adj[curr][i]] == 1)
-                vis[adj[curr][i]] = 2;
-            else
-            {
-                flag = isCyclic(adj, vis, adj[curr][i]);
-                if(flag)
-                    return true;
-            }
+            cin>>arr[i][j];
         }
-        return false;
     }
-    bool possibleBipartition(int n, vector<vector<int>>& v) {
-        
-        if(n <= 2)
-            return true;
-        
-        //make adj list
-        vector<int> adj[n+1];
-        for(int i=0; i<v.size(); i++)
-        {
-            int a = v[i][0], b = v[i][1];
-            adj[a].push_back(b);
-            adj[b].push_back(a);
-        }
-        
-        vector<int> vis(n+1);
-        for(int i=1; i<=n; i++)
-        {
-            vis[i] = 1;
-            for(int j=0; j<adj[i].size(); j++)
-            {
-                //if cycle found then we return false
-                if(isCyclic(adj, vis, adj[i][j]))
-                    return false;
-            }
-            vis[i] = 0;
-        }
-        return true;
-    }
-};
+    cout<<minPathSum(arr)<<"\n";
+}

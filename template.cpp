@@ -2,6 +2,9 @@
 #define base9 1e9
 #define base7 1e7
 #define ll long long int
+#define ull unsigned long long int
+#define pb push_back
+
 using namespace std;
 
 static int speedUp=[](){
@@ -11,7 +14,7 @@ static int speedUp=[](){
     return 0;
 }();
 // solver functionzz
-void solve(){}
+int solve(){}
 
 int main()
 {  
@@ -20,15 +23,15 @@ int main()
     cin.tie(NULL);
 
     // Input
-    int t;
+    ll t,n;
     cin>>t;
     while (t--){
-        ll n; cin>>n;
+        cin>>n;
         vector<ll> v(n);
+        for (size_t i = 0; i < n; i++){cin>>v[i];}
 
         // Output
-        solve();
-
+        cout<<solve();
         cout<<"\n";
     }
     return 0;

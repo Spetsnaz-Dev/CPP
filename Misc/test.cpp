@@ -1,31 +1,46 @@
-vector<bool> processQueries(int arr[], int n, vector<pair<int, int>> &queries,
-                            int q) {
-    int left[n], right[n];
+#define pb push_back
+class Solution {
+    void solve(vector<vector<int>>& adj,vector<vector<int>>& cost,int src,int dst,int k,int& fare,int totCost,vector<bool>& visited)
+    {
+        if(k<-1)
+            return;
+        if(src==dst)
+        {
+            fare = min(fare,totCost);
+            return;
+        }
     
-    int pos = 0;
-    left[0] = 0;
-    for(int i=1;i<n; i++){
-        if(arr[i] > arr[i-1])
-            pos = i;
-        left[i] = pos;
-    }
-    
-    pos = n-1;
-    right[n-1] = n-1;
-    for(int i=n-2;i>=0; i--){
-        if(arr[i] > arr[i+1])
-            pos = i;
-        right[i] = pos;
-    }
-    
-    vector<bool> ans;
-    for(int i=0; i<queries.size(); i++){
-        int l = queries[i].first, r = queries[i].second;
+        visited[src] = true;
+        for(int i=0;i<adj[src].size();++i)
+        {
+            if(!visited[adj[src][i]] && (totCost+cost[src][adj[src][i]] <= fare))
+                solve(adj,cost,adj[src][i],dst,k-1,fare,totCost+cost[src][adj[src][i]],visited);
+        }
         
-        if(right[l] >= left[r])
-            ans.push_back(1);
-        else
-            ans.push_back(0);
+        visited[src] = false;
     }
-    return ans;
-}
+public:
+    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int K) 
+    {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        cout.tie(NULL);
+        
+        vector<vector<int>> adj(n);
+        vector<vector<int>> cost(n+1,vector<int>(n+1));
+        
+        for(int i=0;i<flights.size();++i)
+        {    
+            adj[flights[i][0]].pb(flights[i][1]);
+            cost[flights[i][0]][flights[i][1]] = flights[i][2];
+        }
+        
+        vector<bool> visited(n+1,false);    //To break cycles
+        int fare = INT_MAX;
+        solve(adj,cost,src,dst,K,fare,0,visited);
+        
+        if(fare==INT_MAX)
+            return -1;
+        return fare;
+    }
+};

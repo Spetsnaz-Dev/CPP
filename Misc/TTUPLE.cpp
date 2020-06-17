@@ -39,11 +39,11 @@ int solve(ll a, ll b, ll c, ll x, ll y, ll z)
         v.push_back(xDiff);v.push_back(yDiff);v.push_back(zDiff);
         int d = chooseD(v);
 
-        if(a != x)
+        if(a != x and a+d <= x)
             a += d;
-        if(b != y)
+        if(b != y and b+d <= y)
             b += d;
-        if(c != z)
+        if(c != z and c+d <= z)
         c += d;
         counter++;
     }
