@@ -1,46 +1,42 @@
-#define pb push_back
-class Solution {
-    void solve(vector<vector<int>>& adj,vector<vector<int>>& cost,int src,int dst,int k,int& fare,int totCost,vector<bool>& visited)
-    {
-        if(k<-1)
-            return;
-        if(src==dst)
-        {
-            fare = min(fare,totCost);
-            return;
+#include<bits/stdc++.h>
+#include<vector>
+using namespace std;
+long n, m, x, y, t;
+long solve(int n, int m, int x, int y){
+    long res = 0;
+    vector<vector<int>> v(n, vector<int>(m, 0));
+
+    for(int i=0; i<n; i++){
+        for(int j=0; j<m; j++){
+            int q = 0, w = 0; 
+            if(i == 0 and j == 0){
+                v[i][j] = max(x, y);
+                res += v[i][j];
+                continue;
+            }
+            if(i > 0)
+                q = v[i-1][j];
+            if(j > 0)
+                w = v[i][j-1];
+            v[i][j] = max(y - max(q, w), 0);
+            res += v[i][j];
         }
-    
-        visited[src] = true;
-        for(int i=0;i<adj[src].size();++i)
-        {
-            if(!visited[adj[src][i]] && (totCost+cost[src][adj[src][i]] <= fare))
-                solve(adj,cost,adj[src][i],dst,k-1,fare,totCost+cost[src][adj[src][i]],visited);
-        }
-        
-        visited[src] = false;
     }
-public:
-    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int K) 
-    {
-        ios_base::sync_with_stdio(false);
-        cin.tie(NULL);
-        cout.tie(NULL);
-        
-        vector<vector<int>> adj(n);
-        vector<vector<int>> cost(n+1,vector<int>(n+1));
-        
-        for(int i=0;i<flights.size();++i)
-        {    
-            adj[flights[i][0]].pb(flights[i][1]);
-            cost[flights[i][0]][flights[i][1]] = flights[i][2];
+    // print matrix
+    for(int i=0; i<n; i++){
+        for(int j=0; j<m; j++){
+            // res += v[i][j];
+            cout<<v[i][j]<<" ";
         }
-        
-        vector<bool> visited(n+1,false);    //To break cycles
-        int fare = INT_MAX;
-        solve(adj,cost,src,dst,K,fare,0,visited);
-        
-        if(fare==INT_MAX)
-            return -1;
-        return fare;
+        cout<<"\n";
     }
-};
+    return res;
+}
+int main(){
+    cin>>t;
+    while(t--){
+    cin>>n>>m>>x>>y;
+    cout<<solve(n, m, x, y)<<"\n";
+    }
+    return 0;
+}

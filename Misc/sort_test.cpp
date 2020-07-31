@@ -1,21 +1,31 @@
-class Solution {
-public:
-    vector<vector<string>> suggestedProducts(vector<string>& pro, string sWord) {
-        sort(pro.begin(),pro.end());
-        vector<vector<string>> res(sWord.size(),vector<string>{});
-        for(auto p:pro){
-            for(int i=0;i<sWord.size();i++){
-                if(p[i]==sWord[i]){
-                    res[i].push_back(p);
-                }
-                else
-                    break;
-            }
+int Solution::solve(int A) {
+    int n = A;
+    int count = 0;
+    int index;
+    for (int i = 31; i >= 0; i--) {
+        int b = A & (1 << i);
+        if (b != 0) {
+            index = i;
+            break;
         }
-        for(auto& v:res){
-            if(v.size()>3)
-                v.resize(3);
-        }
-        return res;
     }
-};
+    // cout<<index<<endl;
+    for (int i = 0; i <= index; i++) {
+        int b = n & (1 << i);
+        if (b == 0) {
+            int a = n / (1 << (i + 1));
+            a = ((a % mod)((1 << i) % mod)) % mod;
+            count = ((count % mod) + (a % mod)) % mod;
+        } else {
+            int a = n / (1 << (i + 1));
+            a = ((a % mod)((1 << i) % mod)) % mod;
+            count = ((count % mod) + (a % mod)) % mod;
+            int k = n % (1 << (i + 1)) - (1 << i) + 1;
+            count = ((count % mod) + (k % mod)) % mod;
+
+        }
+    }
+    // cout<<index<<endl;
+    return count % mod;
+
+}
