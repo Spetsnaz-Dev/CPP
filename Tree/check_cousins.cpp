@@ -11,11 +11,12 @@ struct Node* newNode(int item)
     temp->data = item; 
     temp->left = temp->right = NULL; 
     return temp; 
-} 
+}
 bool ifCousin(Node *root,Node *a,Node *b)
 {
     if(root == NULL)
         return 0;
+        
     queue<pair<Node*, Node*>> q;
     Node *t = newNode(-1);
     q.push(make_pair(root, t));
