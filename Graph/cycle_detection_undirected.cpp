@@ -1,71 +1,44 @@
-/* This function is used to detect a cycle in undirected graph
-*  adj[]: array of vectors to represent graph
-*  V: number of vertices
-*/
-
-//  Method 1
-bool isCyclic_util(vector<int> adj[], vector<int> visited, int curr)
+bool find_cycle(vector<vector<int>> &graph,int n,int s,vector<int> &visited,int par)
 {
-    if(visited[curr]==2)
-        return true;
+    visited[s] = 1;
     
-    visited[curr] = 1;
-    bool FLAG = false;
-    for(int i=0;i<adj[curr].size();++i)
+    for (int i = 0;i < graph[s].size();i++)
     {
-        if(visited[adj[curr][i]]==1)
-            visited[adj[curr][i]] = 2;
-        else
-        {
-            FLAG = isCyclic_util(adj, visited, adj[curr][i]);
-            if(FLAG==true)
-                return true;
-        }
-    }
-    return false;
-}
-
-bool isCyclic(vector<int> adj[], int V)
-{
-   vector<int> visited(V,0);
-   bool FLAG = false;
-   for(int i=0;i<V;++i)
-   {
-        visited[i] = 1;
-        for(int j=0;j<adj[i].size();++j)
-        {
-            FLAG = isCyclic_util(adj,visited,adj[i][j]);
-            if(FLAG==true)
-                return true;
-        }
-        visited[i] = 0;
-   }
-   return false;
-}
-
-//  Method 2
-bool findCycle(int pos, int vis[], vector<int> adj[], int parent)
-{
-    vis[pos] = true;
-    
-    for(int i=0; i<adj[pos].size(); i++){
-        if(!vis[adj[pos][i]]){
-            if(findCycle(adj[pos][i], vis, adj, pos))
-                return true;
-            }
-        else if(adj[pos][i] != parent)
+        if (visited[graph[s][i]] == 0 and find_cycle(graph,n,graph[s][i],visited,s) == true)
+            return true;
+        else if (graph[s][i] != par)
             return true;
     }
     return false;
 }
-bool isCyclic(vector<int> adj[], int V)
-{
-    int vis[V] = {false};
+
+int solve(int n, vector<vector<int>>& a) {
     
-    for(int v=0; v<V; v++)
-        if(!vis[v])
-            if(findCycle(v, vis, adj, -1))
-                return true;
-            
-    return false;
+    int m = a.size();
+    
+    if (m >= n)
+        return 1;
+    
+    vector<vector<int>> graph;
+    graph.resize(n+1);
+    
+    for (int i = 0;i < m;i++)
+    {
+        graph[a[i][0]].emplace_back(a[i][1]);
+        graph[a[i][1]].emplace_back(a[i][0]);
+    }
+    
+    vector<int> visited;
+    visited.resize(n+1,0);
+    
+    for (int i = 1;i <= n;i++)
+    {
+        if (visited[i] == 0)
+        {
+            if (find_cycle(graph,n,i,visited,0) == true)
+                return 1;
+        }
+    }
+    
+    return 0;
 }

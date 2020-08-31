@@ -15,21 +15,29 @@ static int speedUp=[](){
 }();
 
 
-// solver functionzz
-int solve(){}
+void solve(vector<int>& arr, int n){
+    if(n <= 2){  
+        cout<<"-1"; 
+        return;
+        }
+
+    if(arr[0]+arr[1] > arr[n-1]){
+        cout<<"-1";
+        return;
+    }
+    cout<<"1 "<<"2 "<<n;
+    return;
+}
 
 int main()
 {
-    // Input
     ll t,n;
     cin>>t;
     while (t--){
         cin>>n;
-        vector<ll> v(n);
-        for (size_t i = 0; i < n; i++){cin>>v[i];}
-
-        // Output
-        cout<<solve();
+        vector<int> v(n);
+        for(int i=0; i<n; i++)  cin>>v[i];
+        solve(v, n);
         cout<<"\n";
     }
     return 0;

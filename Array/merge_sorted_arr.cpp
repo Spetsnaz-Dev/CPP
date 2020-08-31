@@ -19,18 +19,29 @@ void merge(int arr1[], int arr2[], int m, int n) {
 }
 
 int main() {
-    int arr1[] = {1, 5, 9, 10, 15, 20}; 
-    int arr2[] = {2, 3, 8, 13}; 
+    int t;
+    cin>>t;
+    while (t--)
+    {
+        int a, b;
+        cin>>a>>b;
+        int arr1[a], arr2[b];
+        for (int i = 0; i < a; i++)
+        {
+            cin>>arr1[i];
+        }
+        for (int i = 0; i < b; i++)
+        {
+            cin>>arr2[i];
+        }
+        merge(arr1, arr2, a, b); 
 
-    int m = sizeof(arr1)/sizeof(arr1[0]); 
-    int n = sizeof(arr2)/sizeof(arr2[0]); 
-    merge(arr1, arr2, m, n); 
-
-    cout << "After Merging \nFirst Array: "; 
-    for (int i=0; i<m; i++) 
-        cout << arr1[i] << " "; 
-    cout << "\nSecond Array: "; 
-    for (int i=0; i<n; i++) 
-        cout << arr2[i] << " "; 
+        // cout << "After Merging \nFirst Array: "; 
+        for (int i=0; i<a; i++) 
+            cout << arr1[i] << " "; 
+        // cout << "\nSecond Array: "; 
+        for (int i=0; i<b; i++) 
+            cout << arr2[i] << " "; 
+    }
    return 0; 
 }
