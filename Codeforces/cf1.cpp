@@ -15,29 +15,22 @@ static int speedUp=[](){
 }();
 
 
-void solve(vector<int>& arr, int n){
-    if(n <= 2){  
-        cout<<"-1"; 
-        return;
-        }
+ll solve(ll x, ll y, ll k){
 
-    if(arr[0]+arr[1] > arr[n-1]){
-        cout<<"-1";
-        return;
-    }
-    cout<<"1 "<<"2 "<<n;
-    return;
+    ll rem = (y * k + k - 1);
+    if(rem % (x-1) != 0)
+        rem += rem/(x-1) + 1;
+    rem += k;
+    return rem;
 }
 
 int main()
 {
-    ll t,n;
+    ll t,x,y,z;
     cin>>t;
     while (t--){
-        cin>>n;
-        vector<int> v(n);
-        for(int i=0; i<n; i++)  cin>>v[i];
-        solve(v, n);
+        cin>>x>>y>>z;
+        cout<<solve(x, y, z);
         cout<<"\n";
     }
     return 0;

@@ -1,6 +1,4 @@
 #include "bits/stdc++.h"
-#define base9 1e9
-#define base7 1e7
 #define ll long long int
 #define ull unsigned long long int
 #define pb push_back
@@ -14,52 +12,49 @@ static int speedUp=[](){
     return 0;
 }();
 
-
-string solve(string v, int x){
-    string res(v.size(), '1');
-
-    for(int i=0; i<v.size(); i++){
-        if(v[i] == '0'){
-            int l = i-x;
-            int r = i+x;
-            if(l>=0 and res[l] != '0')
-                res[l] = '0';
-            if(r < v.size() and res[r] != '0')
-                res[r] = '0';
-        }
+vector<int> a;
+vector<vector<int>> dp;
+int n;
+int ok(int i, int turn){
+    if(i>=n)
+        return dp[i][turn]=0;
+    if(dp[i][turn]!=-1)
+        return dp[i][turn];
+    if(turn){
+        int mini=1e9;
+        if(i<n && a[i]==1)
+            mini=min(mini,ok(i+1,turn^1)+1);
+        if(i<n && a[i]==0)
+            mini=min(mini,ok(i+1,turn^1));
+        if(i+1<n && a[i]==0 && a[i+1]==1)
+            mini=min(mini,ok(i+2,turn^1)+1);
+        if(i+1<n && a[i]==0 && a[i+1]==0)
+            mini=min(mini,ok(i+2,turn^1));
+        if(i+1<n && a[i]==1 && a[i+1]==0)
+            mini=min(mini,ok(i+2,turn^1)+1);
+        if(i+1<n && a[i]==1 && a[i+1]==1)
+            mini=min(ok(i+1, turn^1) + 1,ok(i+2,turn^1) + 2);
+        return dp[i][turn]=mini;
     }
-    // cout<<res<<" ";
-
-    for(int i=0; i<v.size(); i++){
-        if(v[i] == '1'){
-            bool ok = false;
-            int l = i-x;
-            int r = i+x;
-            if(l >= 0 and res[l] == '1'){
-                res[l] = '1';
-                ok = true;
-            }
-            if(r < v.size() and res[r] == '1'){
-                res[r] = '1';
-                ok = true;
-            }
-            if(!ok) return "-1";
-        }
-    }   
-    return res;
+    else{
+        int mini=1e9;
+        mini=min(ok(i+1,turn^1),ok(i+2,turn^1));
+        return dp[i][turn]=mini;
+    }
 }
 
 int main()
 {
-    ll t,n;
+    ll t;
     cin>>t;
     while (t--){
-        string s;
-        cin>>s;
-        int n;
         cin>>n;
+        dp.resize(n, vector<int>(2, -1));
+        a.resize(n);
+        for(int i=0; i<n; i++)
+            cin>>a[i];
 
-        cout<<solve(s, n);
+        cout<<ok(0, 1);
         cout<<"\n";
     }
     return 0;

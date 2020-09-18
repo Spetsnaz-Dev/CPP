@@ -13,8 +13,6 @@ void solve(vector<vector<int>>& arr,vector<int>& rot,int r,int c,int layers)
 		if(l%2==1)
 			rot[l] = size-rot[l];
 		
-		//cout<<"Layer: "<<l<<"\n";
-		//cout<<"size: "<<size<<"  rot[l]: "<<rot[l]<<"\n";
 		vector<int> vec(size);
 		//Store value in rotated form in 1D array (Vec)
 		//TOP-DOWN
@@ -25,11 +23,7 @@ void solve(vector<vector<int>>& arr,vector<int>& rot,int r,int c,int layers)
 			temp+=1;
 			temp%=size;
 		}
-		/*
-		cout<<"TD: ";
-		for(int i=0;i<size;++i)
-			cout<<vec[i]<<" ";
-		cout<<"\n";*/
+	
 		//LEFT-RIGHT (Last row)
 		for(int j=l+1;j<c-l-1;++j)
 		{
@@ -37,11 +31,7 @@ void solve(vector<vector<int>>& arr,vector<int>& rot,int r,int c,int layers)
 			temp+=1;
 			temp%=size;
 		}
-		/*
-		cout<<"LR: ";
-		for(int i=0;i<size;++i)
-			cout<<vec[i]<<" ";
-		cout<<"\n";*/
+		
 		//DOWN-TOP (Last Col)
 		for(int i=r-l-1;i>=l;--i)
 		{
@@ -49,11 +39,7 @@ void solve(vector<vector<int>>& arr,vector<int>& rot,int r,int c,int layers)
 			temp+=1;
 			temp%=size;
 		}
-		/*
-		cout<<"DT: ";
-		for(int i=0;i<size;++i)
-			cout<<vec[i]<<" ";
-		cout<<"\n";*/
+		
 		//RIGHT-LEFT(1st row)
 		for(int j=c-l-2;j>l;j--)
 		{
@@ -62,11 +48,7 @@ void solve(vector<vector<int>>& arr,vector<int>& rot,int r,int c,int layers)
 			temp%=size;
 		}
 		sub+=2;
-		/*
-		for(int i=0;i<size;++i)
-			cout<<vec[i]<<" ";
-		cout<<"\n";
-		*/
+
 		//Update new ring
 		temp = 0;
 		for(int i=l;i<r-l;++i)
