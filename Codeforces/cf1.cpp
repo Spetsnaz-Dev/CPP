@@ -1,37 +1,34 @@
-#include "bits/stdc++.h"
-#define base9 1e9
-#define base7 1e7
-#define ll long long int
-#define ull unsigned long long int
-#define pb push_back
-
+#include <bits/stdc++.h> 
 using namespace std;
 
-static int speedUp=[](){
-    std::ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
-    return 0;
-}();
+vector<vector<int>> res;
+vector<int> v;
+int solve(int n, int x){
+    if(n <= 2)  return 1;
 
+    int minn = 3, maxx = 3 + x - 1, res = 2;
+    while (1)
+    {   
+        if(n >= minn and n <= maxx) 
+            return res;
 
-ll solve(ll x, ll y, ll k){
-
-    ll rem = (y * k + k - 1);
-    if(rem % (x-1) != 0)
-        rem += rem/(x-1) + 1;
-    rem += k;
-    return rem;
+        minn = minn + x;
+        maxx = minn + x - 1;
+        // cout<<minn<<" - "<<maxx<<"\n";
+        res++;
+    }
+    return res;
 }
-
-int main()
+int main() 
 {
-    ll t,x,y,z;
+    int t;
     cin>>t;
-    while (t--){
-        cin>>x>>y>>z;
-        cout<<solve(x, y, z);
-        cout<<"\n";
+    while (t--)
+    {
+        int n,x;
+        cin>>n>>x;
+        cout<<solve(n, x);
+        cout<<endl;
     }
     return 0;
-}
+} 
