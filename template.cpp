@@ -4,7 +4,6 @@
 #define ll long long int
 #define ull unsigned long long int
 #define pb push_back
-
 using namespace std;
 
 static int speedUp=[](){

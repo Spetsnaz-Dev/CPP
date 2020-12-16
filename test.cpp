@@ -1,46 +1,27 @@
 #include "bits/stdc++.h"
-#define ll long long int
-#define ull unsigned long long int
-#define pb push_back
 using namespace std;
 
-static int speedUp=[](){
-    std::ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
-    return 0;
-}();
+int main(){
+     int n, x;
+     cin>>n;     
+     priority_queue<int> pq;
+     for (int i = 0; i < n; i++)
+     {
+         cin>>x;
+         pq.push(x);
+     }
 
-
-// solver functionzz
-int solve(vector<int>& arr, int n){
-    int count = 0, res = 0;
-    for(int i=0; i<n; i++){
-        count = 1;
-        int curr = arr[i];
-        while(i+1 < n and arr[i] == arr[i+1] and arr[i] % 2 != 0){
-            i++;
-            count++;
-        }
-        if(curr & 1)
-            res = max(res, count);
-    }
-    return res;
-}
-
-int main()
-{
-    // Input
-    int n;
-    cin>>n;
-    vector<int> v(n);
-    for (int i = 0; i < n; i++)
-    {
-        cin>>v[i];
-    }
-    
-    // Output
-    cout<<solve(v, n);
-    cout<<"\n";
-    return 0;
+     int res = 0, last = 0;
+     while (!pq.empty())
+     {
+         int ele = pq.top();
+         pq.pop();
+         ele--;
+         res++;
+         if(last > 0){
+            pq.push(last);
+         }
+         last = ele;
+     }
+     cout<<res<<"\n";
 }
