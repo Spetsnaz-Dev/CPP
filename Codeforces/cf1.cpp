@@ -1,23 +1,24 @@
 #include <bits/stdc++.h> 
+#define pb push_back
 using namespace std;
 
-vector<vector<int>> res;
-vector<int> v;
-int solve(int n, int x){
-    if(n <= 2)  return 1;
+string solve(string s1, string s2, int n){
+    int c1 = 0, c2 = 0, c3 = 0;
 
-    int minn = 3, maxx = 3 + x - 1, res = 2;
-    while (1)
-    {   
-        if(n >= minn and n <= maxx) 
-            return res;
-
-        minn = minn + x;
-        maxx = minn + x - 1;
-        // cout<<minn<<" - "<<maxx<<"\n";
-        res++;
+    for(int i=0; i<n; i++){
+        if(s1[i] > s2[i])
+            c1++;
+        else if(s1[i] < s2[i])
+            c2++;
+        else
+            c3++;
     }
-    return res;
+
+    if(c1 > c2)
+        return "RED";
+    else if(c1 < c2)
+        return "BLUE";
+    return "EQUAL";
 }
 int main() 
 {
@@ -25,10 +26,12 @@ int main()
     cin>>t;
     while (t--)
     {
-        int n,x;
-        cin>>n>>x;
-        cout<<solve(n, x);
-        cout<<endl;
+        int n;
+        cin>>n;
+        string s1, s2;
+        cin>>s1;
+        cin>>s2;
+        cout<<solve(s1, s2, n)<<"\n";
     }
     return 0;
 } 
