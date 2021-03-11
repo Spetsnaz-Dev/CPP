@@ -35,7 +35,7 @@ Trienode *getNode(char c)
 
 void insert(char *s)
 {
-    Trienode *curr = root;
+    Trienode *curr = root;  
     int index;
     for(int i=0; s[i]!='\0'; ++i)
     {
@@ -132,3 +132,69 @@ int main()
 
     return 0;
 }
+
+
+// Method 2 
+struct TrieNode {
+    TrieNode* children[26];
+    bool is_end;
+    int count;
+    
+    TrieNode() {
+        memset(children, 0, sizeof(children));
+        is_end = false;
+        count = 0;
+    }
+};
+
+class Solution {
+public:
+    int countSubstrings(string s, string t) {
+        TrieNode* root = new TrieNode();
+        int ret = 0;
+        
+        for(int i = 0; i < s.size(); i++) {
+            insert(root, s, i, s.size());
+        }
+        
+        for(int i = 0; i < t.size(); i++) {
+            search(root, t, i, t.size(), 0, ret);
+        }
+
+        return ret;
+    }
+
+private:
+    void insert(TrieNode* root, string word, int i, int len) {
+        root->is_end = true;
+        root->count += 1;
+        
+        if(i >= len) return;
+        
+        if(root->children[word[i]-'a'] == nullptr) {
+            root->children[word[i]-'a'] = new TrieNode();
+        }
+        
+        insert(root->children[word[i]-'a'], word, i+1, len);
+    }
+    
+    void search(TrieNode* root, string word, int i, int len, int mismatches, int& ret) {
+        if(mismatches > 1) return;
+        
+        if(mismatches == 1) {
+            ret += root->count;
+        }
+        
+        if(i >= len) return;
+        
+        for(int k = 0; k < 26; k++) {
+            if(root->children[k]) {
+                if(k == word[i]-'a') {
+                    search(root->children[k], word, i+1, len, mismatches, ret);
+                } else {
+                    search(root->children[k], word, i+1, len, mismatches+1, ret);
+                }
+            }
+        }
+    }
+};
